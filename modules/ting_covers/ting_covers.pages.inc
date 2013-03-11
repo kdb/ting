@@ -78,7 +78,10 @@ function ting_covers_faust($preset, $faust_number) {
   $path = ting_covers_faust_path($faust_number);
 
   if (!ting_covers_cache_is_valid($path, $preset)) {
-    $info = ting_get_additional_info(array($faust_number));
+    $info = ting_get_additional_info((object) array(
+      'localIdentifier' => $faust_number,
+      'libraryCode' => variable_get('addi_group', 0),
+    ));
 
     if (is_object($info[$faust_number])) {
       if ($info[$faust_number]->detailUrl) {
